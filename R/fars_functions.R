@@ -1,11 +1,11 @@
 #' Data Input
 #'
-#' @description Reads a file in table format and creates a data frame table from it.
-#' @param filename the name of the file which the data are to be read from.
+#' @description After checking if a file exist in a given path, the function read the
+#'  file and creat a data frame table.
+#' @param filename .csv file from which the data will be read
 #'
-#' @return returns a data frame table if the file exists, throws an error if the file
-#'   doesn't exist. If the filename does not contain an absolute path, the filename
-#'   is relative to the current working directory, \code{getwd()}.
+#' @return heck if the file exists, gives error if it does not. if the file exists,
+#'  it read the file in a data frame and returns it \code{getwd()}.
 #' @export
 #'
 #' @importFrom dplyr tbl_df %>%
@@ -13,7 +13,7 @@
 #'
 #' @examples
 #' \dontrun{
-#'   fars_read("accident_2013.csv.bz2")
+#'   fars_read("accident_2010.csv.bz2")
 #' }
 #'
 fars_read <- function(filename) {
@@ -25,13 +25,12 @@ fars_read <- function(filename) {
     dplyr::tbl_df(data)
 }
 
-#' Generate file names for data files from the US National Highway Traffic Safety
-#' Administration's Fatality Analysis Reporting System
-#' \href{http://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars}{Fatality Analysis Reporting System (FARS)}.
+#' Creat a file name from the data source for a given year
 #'
-#' @param year An integer or string indicating the year that the data file generated
+#' @param year Only logical, integer, real and character vectors are supported. The
+#'  year for which the file will be created
 #'
-#' @return an string as the name of the file
+#' @return read pram as integer. and return file name for a given year
 #' @export
 #'
 #' @examples
@@ -44,11 +43,12 @@ make_filename <- function(year) {
     sprintf("accident_%d.csv.bz2", year)
 }
 
-#' Load several year of FARS data files
+#' Loads FARS data files for given year/s
 #'
-#' @param years a vector of integer or strings that indicated the year of the FARS data files
+#' @param years a vector of years for which FARS data file will be loaded
 #'
-#' @return a list of FARS data for the years in the parameter \code{years}
+#' @return return NULL for an invalid year. For a valid input, returns list of
+#' FARS data \code{years}
 #' @export
 #'
 #' @importFrom dplyr mutate select %>%
@@ -74,12 +74,13 @@ fars_read_years <- function(years) {
     })
 }
 
-#' Monthly number of accidents in each year using the data from FARS data
+#' Monthly number of accident for given years in FARS data
 #'
-#' @param years a list of FARS data for the years in the parameter \code{years}
+#' @param years a vector of years for which FARS data file will be loaded and number
+#'  of accident will be summurized \code{years}
 #'
-#' @return A dataframe with monthly number of accidents in each row and years as
-#' colunms. It uses \code{\link{fars_read_years}} function.
+#' @return return NULL for an invalid year. For a valid input, returns list of
+#' FARS data in data frame in years and number of accidents. It uses \code{\link{fars_read_years}} function.
 #' @export
 #'
 #' @importFrom dplyr bind_rows group_by summarize %>%
@@ -99,10 +100,11 @@ fars_summarize_years <- function(years) {
         tidyr::spread_(~year, ~n)
 }
 
-#' Draws the location of accidents in given state for a given year
+#' For a given state and given year, it draws the location of accidents
 #'
-#' @param state.num An integer that represents the state number
-#' @param year An integer or string
+#' @param state.num an integer representing state number for which the location will be
+#'        drawn
+#' @param year a vector of years for which FARS data file will be loaded
 #'
 #' @return plots a map of the state with the accidents as dots on the map.
 #' It throws an error if \code{"state.num"} is not invalid. If there hasn't been
@@ -115,9 +117,9 @@ fars_summarize_years <- function(years) {
 #'
 #' @examples
 #'   \dontrun{
-#'     fars_map_state(48, 2013)
-#'     fars_map_state(48, 2014)
-#'     fars_map_state(6, 2013)
+#'     fars_map_state(34, 2013)
+#'     fars_map_state(34, 2014)
+#'     fars_map_state(8, 2013)
 #'   }
 fars_map_state <- function(state.num, year) {
     filename <- make_filename(year)

@@ -2,18 +2,19 @@
 % Please edit documentation in R/fars_functions.R
 \name{fars_read_years}
 \alias{fars_read_years}
-\title{Load several year of FARS data files}
+\title{Loads FARS data files for given year/s}
 \usage{
 fars_read_years(years)
 }
 \arguments{
-\item{years}{a vector of integer or strings that indicated the year of the FARS data files}
+\item{years}{a vector of years for which FARS data file will be loaded}
 }
 \value{
-a list of FARS data for the years in the parameter \code{years}
+return NULL for an invalid year. For a valid input, returns list of
+FARS data \code{years}
 }
 \description{
-Load several year of FARS data files
+Loads FARS data files for given year/s
 }
 \examples{
   \dontrun{

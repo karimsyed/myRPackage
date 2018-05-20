@@ -7,19 +7,19 @@
 fars_read(filename)
 }
 \arguments{
-\item{filename}{the name of the file which the data are to be read from.}
+\item{filename}{.csv file from which the data will be read}
 }
 \value{
-returns a data frame table if the file exists, throws an error if the file
-  doesn't exist. If the filename does not contain an absolute path, the filename
-  is relative to the current working directory, \code{getwd()}.
+heck if the file exists, gives error if it does not. if the file exists,
+ it read the file in a data frame and returns it \code{getwd()}.
 }
 \description{
-Reads a file in table format and creates a data frame table from it.
+After checking if a file exist in a given path, the function read the
+ file and creat a data frame table.
 }
 \examples{
 \dontrun{
-  fars_read("accident_2013.csv.bz2")
+  fars_read("accident_2010.csv.bz2")
 }
 
 }

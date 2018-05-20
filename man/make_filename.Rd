@@ -2,22 +2,19 @@
 % Please edit documentation in R/fars_functions.R
 \name{make_filename}
 \alias{make_filename}
-\title{Generate file names for data files from the US National Highway Traffic Safety
-Administration's Fatality Analysis Reporting System
-\href{http://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars}{Fatality Analysis Reporting System (FARS)}.}
+\title{Creat a file name from the data source for a given year}
 \usage{
 make_filename(year)
 }
 \arguments{
-\item{year}{An integer or string indicating the year that the data file generated}
+\item{year}{Only logical, integer, real and character vectors are supported. The
+year for which the file will be created}
 }
 \value{
-an string as the name of the file
+read pram as integer. and return file name for a given year
 }
 \description{
-Generate file names for data files from the US National Highway Traffic Safety
-Administration's Fatality Analysis Reporting System
-\href{http://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars}{Fatality Analysis Reporting System (FARS)}.
+Creat a file name from the data source for a given year
 }
 \examples{
 \dontrun{
